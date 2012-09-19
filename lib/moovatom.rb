@@ -125,6 +125,17 @@ module MoovAtom
     end #-- cancel method
 
     ##
+    # The delete() method allows you to delete a video encoded by the Moovatom
+    # servers. It is almost identical to the get_details() and get_status() methods.
+
+    def moovatom_delete(attrs={}, &block)
+      @action = 'delete'
+      attrs.each {|k,v| instance_variable_set "@#{k}", v}
+      yield self if block_given?
+      send_request
+    end
+
+    ##
     # The edit_player() method allows you to change the player attributes for
     # your videos on moovatom's servers. It accepts a hash of player attributes
     # and/or a block to merge/update the @player instance variable created
